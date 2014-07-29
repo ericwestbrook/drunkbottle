@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<!-- libraries -->
+		<script src="js/jquery/jquery-min.js"></script>
+	    <script src="js/underscore/underscore-min.js"></script>
+	    <script src="js/backbone/backbone-min.js"></script>
+	    <script src="js/require/require.js"></script>
+
+	    <!-- models -->
+	    <!--
+	    <script src="js/drunkbottle/models/scenario.js"></script>
+		-->
+
+	    <!-- views -->
+	    {{{block "views"}}}
+
+	    <!-- load in the utilities -->
+	    <script src="js/drunkbottle/utils.js"></script>
+
+	    <!-- hold on to your butts... -->
+	    {{{block "app"}}}
+
+	    <!-- stylesheets -->
+	    <link rel="stylesheet" type="text/css" href="styles/drunkbottle.css"></link>
+	    {{{block "stylesheets"}}}
+
+	    <title>{{title}}</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="body">
+				<div id="video_box"></div>
+				{{{body}}}
+				<div id="controls"></div>
+			</div>
+			<div id="splash"></div>
+		</div>
+	</body>
+</html>

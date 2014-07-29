@@ -1,0 +1,20 @@
+{
+	"name": "drunkbottle",
+	"description": "Don't drink & drive, stupid head.",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"consolidate": "0.10.0",
+		"express": "3.x",
+		"hbs": "2.6.0",
+		"log": "1.4.0",
+		"socket.io": "0.9.10",
+		"swig": "~1.3.2",
+		"underscore": "~1.6.0",
+		"view-helpers": "~0.1.4"
+	},
+	"engines": {
+		"node": "0.8.4",
+		"npm": "1.1.49"
+	}
+}
