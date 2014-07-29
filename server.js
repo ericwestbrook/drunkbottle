@@ -56,7 +56,19 @@ app.get("/adult", function(req, res) {
 
 app.get("/youth", function(req, res) {
 	res.render('youth', {
-		title: 'Click to begin - Youths - Drunk Bottle'
+		title: 'Choose your gender to begin - Youths - Drunk Bottle'
+	});
+});
+
+app.get("/youth/male", function(req, res) {
+	res.render('youth', {
+		title: 'Males - Youths - Drunk Bottle'
+	});
+});
+
+app.get("/youth/female", function(req, res) {
+	res.render('youth', {
+		title: 'Females - Youths - Drunk Bottle'
 	});
 });
 

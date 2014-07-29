@@ -7,3 +7,52 @@
 
   	background-position: top right;
 }
+
+#home_controls {
+	position : relative;
+	width : 100%;
+	text-align : center;
+}
+
+#gender_tag {
+	display : inline-block;
+	background-image : url('/images/youth/gender.png');
+	background-position: top center;
+	background-repeat: no-repeat;
+	-webkit-background-size: 100%;
+  	-moz-background-size: 100%;
+  	-o-background-size: 100%;
+  	background-size: 100%;
+	width : 6%;
+	height : 100px;
+	margin-right : 2%;
+}
+
+.gender_button {
+	display : inline-block;
+	background-position: top center;
+	background-repeat: no-repeat;
+	-webkit-background-size: 100%;
+  	-moz-background-size: 100%;
+  	-o-background-size: 100%;
+  	background-size: 100%;
+	width: 8%;
+	height : 100px;
+}
+
+#gender_male {
+	background-image : url('/images/youth/male_button.png');
+	margin-right : 2%;
+}
+
+#gender_male:hover {
+	background-image : url('/images/youth/male_button_hit.png');
+}
+
+#gender_female {
+	background-image : url('/images/youth/female_button.png');
+}
+
+#gender_female:hover {
+	background-image : url('/images/youth/female_button_hit.png');
+}

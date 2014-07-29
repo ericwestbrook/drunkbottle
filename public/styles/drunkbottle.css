@@ -5,6 +5,11 @@ body {
 	color : #ffffff;
 }
 
+.clear {
+	float: none;
+	clear: both;
+}
+
 #wrapper {
 	position : absolute;
 	left : 0;
@@ -18,24 +23,94 @@ body {
 
 #body {
 	position : absolute;
-	width: 60%;
+	width: 70%;
 	height : 100%;
-	left: 20%;
+	left: 15%;
 	top : 0;
-	right : 10%;
+	right : 15%;
 	bottom : 0;
 	background-color : #231f20;
+	overflow : hidden;
 }
 
 video {
-	position : absolute;
-	top : 0;
-	left: 0;
-	right: 0;
 	width: 100%;
 	display: none;
+	margin-bottom : 6%;
 }
 
 video.on {
 	display: block;
+}
+
+#activity_buttons {
+	position : relative;
+	width : 90%;
+	margin : 0 auto;
+	transition : opacity .5s;
+
+}
+
+#activity_buttons .page {
+	position : relative;
+	display : flex;
+	justify-content: space-around;
+}
+
+.activity_button {
+	position : relative;
+	display : block;
+	width: 9.271523178808%;
+	transition : right 1s 0, transform .5s 0;
+	right: 0%;
+}
+
+.activity_button:hover {
+	transform:scale(1.1);
+	transition : transform .5s 0;
+}
+
+.activity_button img {
+	display: block;
+	position: absolute;
+	top : 0;
+	left : 0;
+	width: 100%;
+}
+
+#activity_buttons.disabled {
+	opacity: .6;
+	pointer-events : none;
+}
+
+#activity_buttons.preload .activity_button {
+	right : 110%;
+}
+
+.activity_button:nth-child(1) {
+transition : right 1s 0.6s, transform .5s 0;
+}
+
+.activity_button:nth-child(2) {
+	transition : right 1s 0.5s, transform .5s 0;
+}
+
+.activity_button:nth-child(3) {
+	transition : right 1s 0.4s, transform .5s 0;
+}
+
+.activity_button:nth-child(4) {
+	transition : right 1s 0.3s, transform .5s 0;
+}
+
+.activity_button:nth-child(5) {
+	transition : right 1s 0.2s, transform .5s 0;
+}
+
+.activity_button:nth-child(6) {
+	transition : right 1s 0.1s, transform .5s 0;
+}
+
+.activity_button:nth-child(7) {
+	transition : right 1s 0, transform .5s 0;
 }
