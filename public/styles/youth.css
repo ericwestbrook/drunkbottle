@@ -58,9 +58,8 @@
 }
 
 #next_button {
-	position : absolute;
-	top : 80%;
-	margin : 0 42.5%;
+	position : relative;
+	margin : -14% 42.5% 0 42.5%;
 	height : 100px;
 	width: 15%;
 	height : 100px;
