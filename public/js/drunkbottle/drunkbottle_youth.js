@@ -38,23 +38,12 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	initialize: function() {
-		this.homeView = new HomeView();
-		$('#video_box').html(this.homeView.el);
-
 		this.splashView = new SplashView();
 		$('#splash').html(this.splashView.el);
 
 		$('#next_button').click(function() {
 			$('#splash').removeClass('on');
 		});
-
-		this.loopTimer = setInterval(function() {
-			var rando = Math.floor((Math.random() * 6) + 1);
-			$('#video_box video.on').removeClass('on');
-			$('#video_box video#idle_0' + rando).addClass('on');
-			$('#video_box video.on').get(0).play();
-		}, 20000);
-		$('#video_box video.on').get(0).play();
 	},
 
 	home: function(id) {
