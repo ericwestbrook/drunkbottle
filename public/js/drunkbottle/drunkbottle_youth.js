@@ -38,12 +38,7 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	initialize: function() {
-		this.splashView = new SplashView();
-		$('#splash').html(this.splashView.el);
-
-		$('#next_button').click(function() {
-			$('#splash').removeClass('on');
-		});
+		
 	},
 
 	home: function(id) {
@@ -213,11 +208,14 @@ var AppRouter = Backbone.Router.extend({
 
 		$('#video_box').html(this.activityView.el);
 
+		if (!this.splashView) {
+			this.splashView = new SplashView();
+			$('#splash').html(this.splashView.el);
+		}
 
-
-
-
-
+		$('#next_button').click(function() {
+			$('#splash').removeClass('on');
+		});
 
 		if (this.activityViewCount != 4) {
 			var activityViewCount = this.activityViewCount;
@@ -240,13 +238,7 @@ var AppRouter = Backbone.Router.extend({
 			});
 		}
 
-
-
-
-
-
 		$('#video_box video.on').get(0).play();
-
 
 		var pageNumber = 1;
 		$('#arrow_left').click(function() {
