@@ -90,13 +90,39 @@ var AppRouter = Backbone.Router.extend({
 			$('#activity_buttons').removeClass('preload');
 		}, 1000);
 		setTimeout(function() {
-			$('#activity_buttons').removeClass('disabled')
+			$('#activity_buttons').removeClass('disabled');
+			$('#arrow_right').removeClass('disabled');
 		}, 12000);
 		$('#video_box video.on').get(0).play();
 
 		this.timeoutInterval = setTimeout(function() {
 			// write timeout function and copy to all but home
 		}, 45000);
+
+		var pageNumber = 1;
+		$('#arrow_left').click(function() {
+			if (pageNumber != 1) {
+				$('#page_wrapper').removeClass('page_' + pageNumber);
+				pageNumber--;
+				$('#page_wrapper').addClass('page_' + pageNumber);
+				if (pageNumber == 1) {
+					$('#arrow_left').addClass('disabled');
+				}
+				$('#arrow_right').removeClass('disabled');
+			}
+		});
+
+		$('#arrow_right').click(function() {
+			if (pageNumber != 4) {
+				$('#page_wrapper').removeClass('page_' + pageNumber);
+				pageNumber++;
+				$('#page_wrapper').addClass('page_' + pageNumber);
+				if (pageNumber == 4) {
+					$('#arrow_right').addClass('disabled');
+				}
+				$('#arrow_left').removeClass('disabled');
+			}
+		});
 	},
 
 	female:function(id) {
