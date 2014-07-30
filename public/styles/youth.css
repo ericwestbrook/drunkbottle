@@ -56,3 +56,24 @@
 #gender_female:hover {
 	background-image : url('/images/youth/female_button_hit.png');
 }
+
+#next_button {
+	position : absolute;
+	top : 80%;
+	margin : 0 42.5%;
+	height : 100px;
+	width: 15%;
+	height : 100px;
+	background-image : url('/images/youth/next_button.png');
+	background-position: top center;
+	background-repeat: no-repeat;
+	-webkit-background-size: 100%;
+  	-moz-background-size: 100%;
+  	-o-background-size: 100%;
+  	background-size: 100%;
+  	cursor : pointer;
+}
+
+#next_button:hover {
+	background-image : url('/images/youth/next_button_hit.png');
+}

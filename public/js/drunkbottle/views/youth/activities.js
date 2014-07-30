@@ -7,6 +7,7 @@ window.ActivitiesView = Backbone.View.extend({
 	render: function() {
 		var data = { gender : this.options.gender };
 		$(this.el).html(this.template(data));
+		$('#splash').removeClass('on');
 		return this;
 	}
 });

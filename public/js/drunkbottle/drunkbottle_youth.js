@@ -34,14 +34,19 @@ var AppRouter = Backbone.Router.extend({
 		""							: "home",
 		"male"						: "male",
 		"female"					: "female", 
-		"activities/:activity"		: "activity",
-		"splash"					: "splash",
-		"conclude"					: "conclude",   
+		"activities/:activity"		: "activity",  
 	},
 
 	initialize: function() {
 		this.homeView = new HomeView();
 		$('#video_box').html(this.homeView.el);
+
+		this.splashView = new SplashView();
+		$('#splash').html(this.splashView.el);
+
+		$('#next_button').click(function() {
+			$('#splash').removeClass('on');
+		});
 
 		this.loopTimer = setInterval(function() {
 			var rando = Math.floor((Math.random() * 6) + 1);
@@ -70,6 +75,7 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	male: function(id) {
+		this.gender = 'male';
 		clearInterval(this.loopTimer);
 		if (!this.maleView) {
 			this.maleView = new ActivitiesView({gender : 'male'});
@@ -87,7 +93,7 @@ var AppRouter = Backbone.Router.extend({
 		setTimeout(function() {
 			$('#activity_buttons').removeClass('preload');
 		}, 1000);
-		$("#video_box video.on").bind("ended", function() {
+		$("#video_box video.on").unbind().bind("ended", function() {
 			$('#activity_buttons').removeClass('disabled');
 			$('#arrow_right').removeClass('disabled');
 		});
@@ -124,6 +130,7 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	female: function(id) {
+		this.gender = 'female';
 		clearInterval(this.loopTimer);
 		if (!this.femaleView) {
 			this.femaleView = new ActivitiesView({gender : 'female'});
@@ -141,7 +148,7 @@ var AppRouter = Backbone.Router.extend({
 		setTimeout(function() {
 			$('#activity_buttons').removeClass('preload');
 		}, 1000);
-		$("#video_box video.on").bind("ended", function() {
+		$("#video_box video.on").unbind().bind("ended", function() {
 			$('#activity_buttons').removeClass('disabled');
 			$('#arrow_right').removeClass('disabled');
 		});
@@ -178,11 +185,29 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	activity: function(activity) {
-		if (this.activityCount) {
-			this.activityCount++;
-		} else {
-			this.activityCount = 1;
+		if (!this.gender) {
+			this.gender = 'female';
 		}
+		var gender = this.gender;
+
+		$('#splash').removeClass('on');
+
+		clearInterval(this.loopTimer);
+
+		if (!this.activityViewCount) {
+			this.activityViewCount = 1;
+		} else {
+			this.activityViewCount++;
+		}
+
+		if (!this.controlsView) {
+			this.controlsView = new ControlsView();
+			$('#controls').html(this.controlsView.el);
+			setTimeout(function() {
+				$('#activity_buttons').removeClass('preload');
+			}, 1000);
+		}
+
 		var videoCount = dbActivities[activity];
 		var activityFile = '';
 		if (videoCount > 1) {
@@ -196,6 +221,65 @@ var AppRouter = Backbone.Router.extend({
 		});
 
 		$('#video_box').html(this.activityView.el);
+
+
+
+
+
+
+
+		if (this.activityViewCount != 4) {
+			var activityViewCount = this.activityViewCount;
+			$("#video_box video.on").unbind().bind("ended", function() {
+				$('#activity_buttons').removeClass('disabled');
+				$('#arrow_right').removeClass('disabled');
+				$('.fact_wrap').removeClass('on');
+				$('#youth_fact_wrap_0' + activityViewCount).addClass('on');
+				$('.fact_wrap.on video').get(0).play();
+				$('#splash').addClass('on');
+			});
+		} else {
+			var activityViewCount = this.activityViewCount;
+			$("#video_box video.on").unbind().bind("ended", function() {
+				$('#activity_buttons').removeClass('disabled');
+				$('#arrow_right').removeClass('disabled');
+
+				$('#splash').addClass('on');
+			});
+		}
+
+
+
+
+
+
+		$('#video_box video.on').get(0).play();
+
+
+		var pageNumber = 1;
+		$('#arrow_left').click(function() {
+			if (pageNumber != 1) {
+				$('#page_wrapper').removeClass('page_' + pageNumber);
+				pageNumber--;
+				$('#page_wrapper').addClass('page_' + pageNumber);
+				if (pageNumber == 1) {
+					$('#arrow_left').addClass('disabled');
+				}
+				$('#arrow_right').removeClass('disabled');
+			}
+		});
+
+		$('#arrow_right').click(function() {
+			if (pageNumber != 4) {
+				$('#page_wrapper').removeClass('page_' + pageNumber);
+				pageNumber++;
+				$('#page_wrapper').addClass('page_' + pageNumber);
+				if (pageNumber == 4) {
+					$('#arrow_right').addClass('disabled');
+				}
+				$('#arrow_left').removeClass('disabled');
+			}
+		});
 	}
 });
 
@@ -203,7 +287,8 @@ templates = [
 	'HomeView',
 	'ActivitiesView',
 	'ActivityView',
-	'ControlsView'
+	'ControlsView',
+	'SplashView'
 ];
 
 utils.loadTemplate(templates, 'youth', function() {

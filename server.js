@@ -72,6 +72,13 @@ app.get("/youth/female", function(req, res) {
 	});
 });
 
+app.get("/youth/activities/:activity", function(req, res) {
+	var activity = req.params.activity;
+	res.render('youth', {
+		title: activity + ' - Youths - Drunk Bottle'
+	});
+});
+
 // END ROUTES
 //
 // ============================================

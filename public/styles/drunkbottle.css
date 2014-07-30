@@ -21,7 +21,7 @@ body {
 	background-color: #666;
 }
 
-#body {
+#body, #splash {
 	position : absolute;
 	width: 70%;
 	height : 100%;
@@ -33,13 +33,21 @@ body {
 	overflow : hidden;
 }
 
+#splash {
+	display : none;
+}
+
+#splash.on {
+	display : block;
+}
+
 video {
 	width: 100%;
 	display: none;
 	margin-bottom : 6%;
 }
 
-video.on {
+#video_box video.on, #splash.on .fact_wrap.on video {
 	display: block;
 }
 
@@ -49,7 +57,7 @@ video.on {
 
 #control_arrows {
 	position : absolute;
-	top : 12.5%;
+	top : 27.5%;
 	left : 0;
 	right : 0;
 	width : 96%;
@@ -90,7 +98,7 @@ video.on {
 #activity_buttons {
 	position : relative;
 	width : 90%;
-	height: 500px;
+	height: 200px;
 	overflow: hidden;
 	margin : 0 auto;
 	transition : opacity .5s;
