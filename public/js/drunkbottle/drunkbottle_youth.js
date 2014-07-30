@@ -1,44 +1,42 @@
 // CONFIGURATION
-var drunkBottleConfig = {
-	activities : {
-		//name					: //video count
-		"baseball"				: 2,
-		"basketball"			: 2,
-		"biking"				: 2,
-		"chainsaw"				: 2,
-		"cheerleading"			: 1,
-		"cooking"				: 1,
-		"fishing"				: 1,
-		"football"				: 2,
-		"gymnastics"			: 1,
-		"hiking"				: 1,
-		"hiphop"				: 1,
-		"horsebackriding"		: 1,
-		"hunting"				: 1,
-		"knitting"				: 2,
-		"library"				: 2,
-		"music"					: 2,
-		"photo"					: 1,
-		"rodeo"					: 1,
-		"sewing"				: 1,
-		"skateboarding"			: 2,
-		"soccer"				: 1,
-		"squaredancing"			: 1,
-		"swim"					: 1,
-		"tennis"				: 1,
-		"volleyball"			: 1
-	}
+var dbActivities = {
+	//name					: //video count
+	"baseball"				: 2,
+	"basketball"			: 2,
+	"biking"				: 2,
+	"chainsaw"				: 2,
+	"cheerleading"			: 1,
+	"cooking"				: 1,
+	"fishing"				: 1,
+	"football"				: 2,
+	"gymnastics"			: 1,
+	"hiking"				: 1,
+	"hiphop"				: 1,
+	"horsebackriding"		: 1,
+	"hunting"				: 1,
+	"knitting"				: 2,
+	"library"				: 2,
+	"music"					: 2,
+	"photo"					: 1,
+	"rodeo"					: 1,
+	"sewing"				: 1,
+	"skateboarding"			: 2,
+	"soccer"				: 1,
+	"squaredancing"			: 1,
+	"swim"					: 1,
+	"tennis"				: 1,
+	"volleyball"			: 1
 };
 // END CONFIGURATION
 
 var AppRouter = Backbone.Router.extend({
 	routes: {
-		""					: "home",
-		"male"				: "male",
-		"female"			: "female", 
-		"activity"			: "activity",
-		"splash"			: "splash",
-		"conclude"			: "conclude",   
+		""							: "home",
+		"male"						: "male",
+		"female"					: "female", 
+		"activities/:activity"		: "activity",
+		"splash"					: "splash",
+		"conclude"					: "conclude",   
 	},
 
 	initialize: function() {
@@ -54,7 +52,7 @@ var AppRouter = Backbone.Router.extend({
 		$('#video_box video.on').get(0).play();
 	},
 
-	home:function(id) {
+	home: function(id) {
 		clearInterval(this.loopTimer);
 		$('#controls').html('');
 		if (!this.homeView) {
@@ -71,7 +69,7 @@ var AppRouter = Backbone.Router.extend({
 		$('#video_box video.on').get(0).play();
 	},
 
-	male:function(id) {
+	male: function(id) {
 		clearInterval(this.loopTimer);
 		if (!this.maleView) {
 			this.maleView = new ActivitiesView({gender : 'male'});
@@ -125,7 +123,7 @@ var AppRouter = Backbone.Router.extend({
 		});
 	},
 
-	female:function(id) {
+	female: function(id) {
 		clearInterval(this.loopTimer);
 		if (!this.femaleView) {
 			this.femaleView = new ActivitiesView({gender : 'female'});
@@ -177,12 +175,34 @@ var AppRouter = Backbone.Router.extend({
 				$('#arrow_left').removeClass('disabled');
 			}
 		});
+	},
+
+	activity: function(activity) {
+		if (this.activityCount) {
+			this.activityCount++;
+		} else {
+			this.activityCount = 1;
+		}
+		var videoCount = dbActivities[activity];
+		var activityFile = '';
+		if (videoCount > 1) {
+			var randoVideo = Math.floor((Math.random() * videoCount) + 1);
+			activityFile = activity + '_0' + randoVideo;
+		} else {
+			activityFile = activity;
+		}
+		this.activityView = new ActivityView({
+			filename: activityFile,
+		});
+
+		$('#video_box').html(this.activityView.el);
 	}
 });
 
 templates = [
 	'HomeView',
 	'ActivitiesView',
+	'ActivityView',
 	'ControlsView'
 ];
 

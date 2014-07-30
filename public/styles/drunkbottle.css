@@ -60,7 +60,9 @@ video.on {
 	display : block;
 	position : relative;
 	float : left;
-	width: 2.5%;
+	width : 2.5%;
+	pointer-events : auto;
+	cursor : pointer;
 }
 
 #arrow_right {
@@ -68,6 +70,8 @@ video.on {
 	position : relative;
 	float : right;
 	width : 2.5%;
+	pointer-events : auto;
+	cursor : pointer;
 }
 
 #arrow_left.disabled, #arrow_right.disabled {
