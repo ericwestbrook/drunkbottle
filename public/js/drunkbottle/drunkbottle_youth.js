@@ -208,6 +208,8 @@ var AppRouter = Backbone.Router.extend({
 			}, 1000);
 		}
 
+		$('#controls').addClass('disabled');
+
 		var videoCount = dbActivities[activity];
 		var activityFile = '';
 		if (videoCount > 1) {
@@ -237,6 +239,7 @@ var AppRouter = Backbone.Router.extend({
 				$('#youth_fact_wrap_0' + activityViewCount).addClass('on');
 				$('.fact_wrap.on video').get(0).play();
 				$('#splash').addClass('on');
+				$('#controls').removeClass('disabled');
 			});
 		} else {
 			var activityViewCount = this.activityViewCount;

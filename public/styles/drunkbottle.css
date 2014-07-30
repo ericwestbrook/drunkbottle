@@ -53,6 +53,12 @@ video {
 
 #controls {
 	position : relative;
+	transition : opacity .5s;
+}
+
+#controls.disabled {
+	pointer-events : none;
+	opacity : .6;
 }
 
 #control_arrows {
