@@ -44,9 +44,11 @@ var AppRouter = Backbone.Router.extend({
 
 	home: function(id) {
 		$("#splash").removeClass('on');
+		$('#activity_buttons').removeClass('preload');
 		clearInterval(this.loopTimer);
 		$('#controls').html('');
 		$('#next_button').removeClass('hidden');
+		
 		if (!this.homeView) {
 			this.homeView = new HomeView();
 		}
