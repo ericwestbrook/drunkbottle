@@ -34,7 +34,8 @@ var AppRouter = Backbone.Router.extend({
 		""							: "home",
 		"male"						: "male",
 		"female"					: "female", 
-		"activities/:activity"		: "activity",  
+		"activities/:activity"		: "activity",
+		"conclusion"				: "conclusion"
 	},
 
 	initialize: function() {
@@ -42,8 +43,10 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	home: function(id) {
+		$("#splash").removeClass('on');
 		clearInterval(this.loopTimer);
 		$('#controls').html('');
+		$('#next_button').removeClass('hidden');
 		if (!this.homeView) {
 			this.homeView = new HomeView();
 		}
@@ -203,7 +206,7 @@ var AppRouter = Backbone.Router.extend({
 			activityFile = activity;
 		}
 		this.activityView = new ActivityView({
-			filename: activityFile,
+			filename: activityFile
 		});
 
 		$('#video_box').html(this.activityView.el);
@@ -213,11 +216,12 @@ var AppRouter = Backbone.Router.extend({
 			$('#splash').html(this.splashView.el);
 		}
 
-		$('#next_button').click(function() {
-			$('#splash').removeClass('on');
-		});
+		if (this.activityViewCount < 3) {
+			$('#next_button').click(function() {
+				$('#splash').removeClass('on');
+			});
 
-		if (this.activityViewCount != 4) {
+
 			var activityViewCount = this.activityViewCount;
 			$("#video_box video.on").unbind().bind("ended", function() {
 				$('#activity_buttons').removeClass('disabled');
@@ -225,16 +229,31 @@ var AppRouter = Backbone.Router.extend({
 				$('.fact_wrap').removeClass('on');
 				$('#youth_fact_wrap_0' + activityViewCount).addClass('on');
 				$('.fact_wrap.on video').get(0).play();
-				$('#splash').addClass('on');
+				setTimeout(function() {
+					$('#splash').addClass('on');
+				}, 200);
 				$('#controls').removeClass('disabled');
 			});
 		} else {
+
+			var that = this;
+			$('#next_button').click(function() {
+				$('#splash').removeClass('on');
+				that.navigate('conclusion', {trigger: true});
+			});
+
 			var activityViewCount = this.activityViewCount;
 			$("#video_box video.on").unbind().bind("ended", function() {
 				$('#activity_buttons').removeClass('disabled');
 				$('#arrow_right').removeClass('disabled');
 
-				$('#splash').addClass('on');
+
+				$('.fact_wrap').removeClass('on');
+				$('#youth_fact_wrap_0' + activityViewCount).addClass('on');
+				$('.fact_wrap.on video').get(0).play();
+				setTimeout(function() {
+					$('#splash').addClass('on');
+				}, 200);
 			});
 		}
 
@@ -264,15 +283,43 @@ var AppRouter = Backbone.Router.extend({
 				$('#arrow_left').removeClass('disabled');
 			}
 		});
+	},
+
+	conclusion: function() {
+		var randoVideo = Math.floor((Math.random() * 3) + 1);
+		var that = this;
+		this.conclusionView = new ConclusionView({
+			randoVideo: randoVideo
+		});
+
+		$('#video_box').html(this.conclusionView.el);
+		$('#video_box video').get(0).play();
+		$('#next_button').addClass('hidden');
+
+		$('#video_box video').unbind().bind("ended", function() {
+			$('.fact_wrap').removeClass('on');
+			$('#youth_fact_wrap_04').addClass('on');
+			$('.fact_wrap.on video').get(0).play();
+			setTimeout(function() {
+				$('#splash').addClass('on');
+			}, 200);
+
+			$('.fact_wrap.on video').unbind().bind("ended", function() {
+				setTimeout(function() {
+					that.navigate('', { trigger: true });
+				}, 5000);
+			});
+		});
 	}
 });
 
 templates = [
 	'HomeView',
 	'ActivitiesView',
-	'ActivityView',
+	'ActivityView',	
 	'ControlsView',
-	'SplashView'
+	'SplashView',
+	'ConclusionView'
 ];
 
 utils.loadTemplate(templates, 'youth', function() {

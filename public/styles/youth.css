@@ -76,3 +76,7 @@
 #next_button:hover {
 	background-image : url('/images/youth/next_button_hit.png');
 }
+
+#next_button.hidden {
+	display: none;
+}
