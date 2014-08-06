@@ -201,3 +201,45 @@ transition : right 1s 0.6s, transform .25s 0;
 .activity_button:nth-child(7) {
 	transition : right 1s 0, transform .25s 0;
 }
+
+@media all and (max-width: 799px) {
+	#body, #splash {
+		left : 0;
+		top : 7%;
+		width : 100%;
+		overflow : auto;
+	}
+
+	#splash {
+		top : 0;
+		padding-top : 7%;
+	}
+
+	#page_wrapper {
+		width: 100%;
+	}
+
+	#activity_buttons {
+		height : auto;
+		width : 100%;
+	}
+
+	#activity_buttons .page {
+		width: 100%;
+		float : none;
+		clear : both;
+		height : 100px;
+	}
+
+	#activity_buttons.preload #page_1 .activity_button {
+		right: 0;
+	}
+
+	.activity_button {
+		width : 12%;
+	}
+
+	#control_arrows {
+		display : none;
+	}
+}
