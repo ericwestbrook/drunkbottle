@@ -213,10 +213,10 @@ var AppRouter = Backbone.Router.extend({
 
 		$('#video_box').html(this.activityView.el);
 
-		if (!this.splashView) {
-			this.splashView = new SplashView();
-			$('#splash').html(this.splashView.el);
-		}
+		this.splashView = new SplashView({
+			counter: this.activityViewCount
+		});
+		$('#splash').html(this.splashView.el);
 
 		if (this.activityViewCount < 3) {
 			$('#next_button').click(function() {
